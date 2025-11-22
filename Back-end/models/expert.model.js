@@ -17,10 +17,7 @@ const expertSchema = new Schema({
         country: String
     },
     auth: {
-        username: {
-            type: String,
-            unique: true
-        },
+        username: String,
         password: String,
         public_key: String,
         private_key: String

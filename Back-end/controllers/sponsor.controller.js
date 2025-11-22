@@ -40,13 +40,23 @@ exports.create = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.findOne({
-        "auth.username": req.body.auth.username
-    }, (error, user) => {
-        if (error) throw error;
-        if (user) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0)
+    // Only check for duplicate username if username is provided
+    if (req.body.auth.username && req.body.auth.username !== "") {
+        Sponsor.findOne({
+            "auth.username": req.body.auth.username
+        }, (error, user) => {
+            if (error) throw error;
+            if (user) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0)
 
-        new Sponsor({
+            createSponsor(req, res);
+        });
+    } else {
+        createSponsor(req, res);
+    }
+}
+
+function createSponsor(req, res) {
+    new Sponsor({
             name: req.body.name,
             birth_date: req.body.birth_date,
             description: req.body.description,
@@ -77,7 +87,6 @@ exports.create = (req, res) => {
             message.body = user;
             return res.header("location", "/sponsors/" + user._id).header("Authorization", token).status(message.http).send(message);
         })
-    });
 }
 
 exports.update = (req, res) => {

@@ -168,7 +168,13 @@ export default {
       );
     },
     update() {
-      this.$store.dispatch(`quiz/${EDIT_QUIZ}`, this.$data.quiz).then(
+      // Transform questions array from objects to IDs
+      const quizData = {
+        ...this.$data.quiz,
+        questions: this.$data.quiz.questions.map(q => q.id || q)
+      };
+
+      this.$store.dispatch(`quiz/${EDIT_QUIZ}`, quizData).then(
         () => {
           this.$alert(this.getMessage, "Quiz atualizado!", "success");
           router.push({ name: "listQuizzes" });
@@ -188,6 +194,13 @@ export default {
         if (!this.quiz) {
           this.$alert("Quiz não encontrado!", "Erro", "error");
           router.push({ name: "listQuizzes" });
+        } else {
+          // Transform questions array from strings to objects for v-model
+          if (this.quiz.questions && this.quiz.questions.length > 0) {
+            this.quiz.questions = this.quiz.questions.map(q =>
+              typeof q === "string" ? { id: q } : q
+            );
+          }
         }
       },
       err => {

@@ -1,4 +1,4 @@
-import userService from "@/api/user.service"; // TODO Aleterar depois de API
+import expertService from "@/api/expert.service";
 import {
   SET_EXPERTS,
   SET_MESSAGE,
@@ -27,7 +27,7 @@ const getters = {
 const actions = {
   [FETCH_EXPERTS]: async ({ commit, rootState }) => {
     return new Promise((resolve, reject) => {
-      userService.getExperts(rootState.auth.token).then(
+      expertService.getExperts(rootState.auth.token).then(
         res => {
           commit(SET_EXPERTS, res.body || res);
           resolve(res);
@@ -38,7 +38,7 @@ const actions = {
   },
   [ADD_EXPERT]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      userService.addExpert(rootState.auth.token, payload).then(
+      expertService.addExpert(rootState.auth.token, payload).then(
         res => {
           commit(
             SET_MESSAGE,
@@ -52,7 +52,7 @@ const actions = {
   },
   [EDIT_EXPERT]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      userService.editExpert(rootState.auth.token, payload).then(
+      expertService.editExpert(rootState.auth.token, payload).then(
         res => {
           commit(
             SET_MESSAGE,
@@ -66,7 +66,7 @@ const actions = {
   },
   [REMOVE_EXPERT]: ({ commit, rootState }, id) => {
     return new Promise((resolve, reject) => {
-      userService.removeExpert(rootState.auth.token, id).then(
+      expertService.removeExpert(rootState.auth.token, id).then(
         res => {
           commit(SET_MESSAGE, `O expert foi removido com sucesso!`);
           resolve(res);

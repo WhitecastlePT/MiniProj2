@@ -1,4 +1,4 @@
-import userService from "@/api/user.service"; // TODO Aleterar depois de API
+import sponsorService from "@/api/sponsor.service";
 import {
   SET_SPONSORS,
   SET_MESSAGE,
@@ -27,7 +27,7 @@ const getters = {
 const actions = {
   [FETCH_SPONSORS]: async ({ commit, rootState }) => {
     return new Promise((resolve, reject) => {
-      userService.getSponsors(rootState.auth.token).then(
+      sponsorService.getSponsors(rootState.auth.token).then(
         res => {
           commit(SET_SPONSORS, res.body || res);
           resolve(res);
@@ -38,7 +38,7 @@ const actions = {
   },
   [ADD_SPONSOR]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      userService.addSponsor(rootState.auth.token, payload).then(
+      sponsorService.addSponsor(rootState.auth.token, payload).then(
         res => {
           commit(
             SET_MESSAGE,
@@ -52,7 +52,7 @@ const actions = {
   },
   [EDIT_SPONSOR]: ({ commit, rootState }, payload) => {
     return new Promise((resolve, reject) => {
-      userService.editSponsor(rootState.auth.token, payload).then(
+      sponsorService.editSponsor(rootState.auth.token, payload).then(
         res => {
           commit(
             SET_MESSAGE,
@@ -66,7 +66,7 @@ const actions = {
   },
   [REMOVE_SPONSOR]: ({ commit, rootState }, id) => {
     return new Promise((resolve, reject) => {
-      userService.removeSponsor(rootState.auth.token, id).then(
+      sponsorService.removeSponsor(rootState.auth.token, id).then(
         res => {
           commit(SET_MESSAGE, `O sponsor foi removido com sucesso!`);
           resolve(res);

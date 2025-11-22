@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div>
-            <div v-for="(answer, index) in answers" :key="answer.title">
+            <div v-for="(answer, index) in answers" :key="'answer-' + index">
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-7">

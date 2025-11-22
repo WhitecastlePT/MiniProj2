@@ -78,33 +78,33 @@ const routes = [
   {
     path: "/admin/experts",
     name: "listExperts",
-    component: () => import("@/views/users/ListExperts.vue")
+    component: () => import("@/views/experts/ListExperts.vue")
   },
   {
     path: "/admin/experts/add",
     name: "addExpert",
-    component: () => import("@/views/users/AddExpert.vue")
+    component: () => import("@/views/experts/AddExpert.vue")
   },
   {
     path: "/admin/experts/:expertId",
     name: "editExpert",
-    component: () => import("@/views/users/EditExpert.vue")
+    component: () => import("@/views/experts/EditExpert.vue")
   },
   // Sponsor routes
   {
     path: "/admin/sponsors",
     name: "listSponsors",
-    component: () => import("@/views/users/ListSponsors.vue")
+    component: () => import("@/views/sponsors/ListSponsors.vue")
   },
   {
     path: "/admin/sponsors/add",
     name: "addSponsor",
-    component: () => import("@/views/users/AddSponsor.vue")
+    component: () => import("@/views/sponsors/AddSponsor.vue")
   },
   {
     path: "/admin/sponsors/:sponsorId",
     name: "editSponsor",
-    component: () => import("@/views/users/EditSponsor.vue")
+    component: () => import("@/views/sponsors/EditSponsor.vue")
   },
   {
     path: "/admin/animals",
